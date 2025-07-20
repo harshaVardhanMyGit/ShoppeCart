@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Shopping Cart App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <div id="login-section">
+    <div class="login-card">
+        <h1>Login</h1>
+        <p class="demo-hint">
+            <strong>Demo Credentials:</strong><br>
+            Username: <span class="demo-user">HarshaTest</span><br>
+            Password: <span class="demo-pass" id="demo-pass" onclick="toggleDemoPass()" style="cursor:pointer;">•••••••••••••</span>
+    <span id="demo-pass-actual" style="display:none;">TESTMANUAL</span>
+    <br>
+    <small style="color:#007bff;">Click password to show/hide</small>
+        </p>
+        <form id="login-form" autocomplete="off">
+            <label for="username">Username</label>
+            <input type="text" id="username" placeholder="Enter username" required>
+            <label for="password">Password</label>
+            <input type="password" id="password" placeholder="Enter password" required>
+            <button type="submit">Login</button>
+            <p id="login-error" style="color:red;display:none;"></p>
+        </form>
+    </div>
+</div>
+        <div id="cart-section" style="display:none;">
+            <h1>Shopping Cart</h1>
+            <div id="products"></div>
+            <h2>Your Cart</h2>
+            <div id="cart"></div>
+            <button id="checkout-btn" style="margin-top:20px;">Proceed to Checkout</button>
+        </div>
+        <div id="checkout-section" style="display:none;">
+            <h1>Checkout</h1>
+            <div id="checkout-items"></div>
+            <button id="home-btn" style="margin-top:20px;">Go to Home Page</button>
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body> 
+</html>

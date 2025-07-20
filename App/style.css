@@ -1,0 +1,103 @@
+body {
+    font-family: Arial, sans-serif;
+    background: #f7f7f7;
+    margin: 0;
+    padding: 0;
+}
+
+.login-card {
+    max-width: 350px;
+    margin: 40px auto 0 auto;
+    background: #fff;
+    padding: 32px 24px;
+    border-radius: 10px;
+    box-shadow: 0 2px 12px rgba(0,0,0,0.10);
+    text-align: center;
+}
+
+.login-card h1 {
+    margin-bottom: 18px;
+    color: #007bff;
+}
+
+.login-card label {
+    display: block;
+    text-align: left;
+    margin: 12px 0 4px 0;
+    font-weight: 500;
+    color: #333;
+}
+
+.login-card input[type="text"],
+.login-card input[type="password"] {
+    width: 100%;
+    padding: 9px 10px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    font-size: 1em;
+}
+
+.demo-hint {
+    background: #f0f8ff;
+    border-radius: 6px;
+    padding: 10px;
+    margin-bottom: 18px;
+    font-size: 0.98em;
+    color: #444;
+}
+
+.demo-user, .demo-pass {
+    font-family: monospace;
+    background: #e3e3e3;
+    padding: 2px 6px;
+    border-radius: 4px;
+}
+.container {
+    max-width: 700px;
+    margin: 40px auto;
+    background: #fff;
+    padding: 32px;
+    border-radius: 8px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.08);
+}
+
+h1 {
+    text-align: center;
+    color: #333;
+}
+
+#products, #cart {
+    margin-bottom: 32px;
+}
+
+.product, .cart-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #f0f0f0;
+    margin-bottom: 12px;
+    padding: 12px 18px;
+    border-radius: 6px;
+}
+
+button {
+    background: #007bff;
+    color: #fff;
+    border: none;
+    padding: 7px 16px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 1em;
+    transition: background 0.2s;
+}
+
+button:hover {
+    background: #0056b3;
+}
+
+#cart p {
+    margin-top: 18px;
+    font-size: 1.1em;
+    color: #222;
+}
