@@ -1,46 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
-    <title>Shopping Cart App</title>
+    <title>ShoppeHV Login</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
+
 <body>
-    <div class="container">
-        <div id="login-section">
-    <div class="login-card">
-        <h1>Login</h1>
-        <p class="demo-hint">
-            <strong>Demo Credentials:</strong><br>
-            Username: <span class="demo-user">HarshaTest</span><br>
-            Password: <span class="demo-pass" id="demo-pass" onclick="toggleDemoPass()" style="cursor:pointer;">•••••••••••••</span>
-    <span id="demo-pass-actual" style="display:none;">TESTMANUAL</span>
-    <br>
-    <small style="color:#007bff;">Click password to show/hide</small>
-        </p>
-        <form id="login-form" autocomplete="off">
-            <label for="username">Username</label>
-            <input type="text" id="username" placeholder="Enter username" required>
-            <label for="password">Password</label>
-            <input type="password" id="password" placeholder="Enter password" required>
-            <button type="submit">Login</button>
-            <p id="login-error" style="color:red;display:none;"></p>
-        </form>
-    </div>
-</div>
-        <div id="cart-section" style="display:none;">
-            <h1>Shopping Cart</h1>
-            <div id="products"></div>
-            <h2>Your Cart</h2>
-            <div id="cart"></div>
-            <button id="checkout-btn" style="margin-top:20px;">Proceed to Checkout</button>
+    <div class="main-layout">
+        <div class="info-section">
+            <div class="brand-logo">
+                <span style="font-weight:700; font-size:2em; color:#222;">&#9632;&#9632;</span>
+                <span style="font-weight:700; font-size:1.7em; margin-left:12px; color:#222;">ShoppeHV</span>
+            </div>
+            <h2 class="welcome-title">Welcome to <span style="color:#6c3fcf;">ShoppeHV</span></h2>
+            <p class="welcome-desc">Sign in to access your account and explore the latest collections from top
+                designers.</p>
+            <div class="about-info">
+                <h3>About us</h3>
+                <p>Shop new fashion at the best brands and reach new heights with your style.</p>
+            </div>
         </div>
-        <div id="checkout-section" style="display:none;">
-            <h1>Checkout</h1>
-            <div id="checkout-items"></div>
-            <button id="home-btn" style="margin-top:20px;">Go to Home Page</button>
+        <div class="login-section" id="login-section">
+            <div class="login-card">
+                <h1>Login to your account</h1>
+                <form id="login-form" autocomplete="off">
+                    <label for="username">Username</label>
+                    <input type="text" id="username" placeholder="Enter your username" required>
+                    <label for="password">Password</label>
+                    <input type="password" id="password" placeholder="Enter your password" required>
+                    <label style="display:flex;align-items:center;gap:6px;margin-bottom:8px;">
+                        <input type="checkbox" id="show-password">
+                        Show password
+                    </label>
+                    <button type="submit" class="login-btn">Login</button>
+                    <p id="login-error" style="color:red;display:none;"></p>
+                </form>
+            </div>
         </div>
+        <!-- Shopping Cart Section -->
+        <div id="cart-section" class="page-card" style="display:none;">
+            <div class="shop-layout single-box">
+                <div class="shop-card">
+                    <div id="products" class="product-list"></div>
+                    <div class="cart-box">
+                        <h1 class="cart-title">🛒 Your Cart</h1>
+                        <div id="cart" class="cart-items"></div>
+                        <button id="checkout-btn" class="login-btn">Proceed to Checkout</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+
+        <!-- Checkout Section -->
+        <div id="checkout-section" class="page-card" style="display:none;">
+            <div class="card-content">
+                <h1>Checkout</h1>
+                <div id="checkout-items"></div>
+                <button id="home-btn" class="login-btn">Go to Home Page</button>
+            </div>
+        </div>
+
     </div>
     <script src="script.js"></script>
-</body> 
+</body>
+
 </html>
