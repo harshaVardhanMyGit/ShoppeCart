@@ -1,10 +1,66 @@
-const products = [
-    { id: 1, name: "Apple", price: 250 },
-    { id: 2, name: "Banana", price: 60 },
-    { id: 3, name: "Orange", price: 120 }
+const relatedProducts = [
+    { id: 101, name: "Kiwi", price: 40 },
+    { id: 102, name: "Papaya", price: 30 },
+    { id: 103, name: "Dragon Fruit", price: 80 }
 ];
 
 let cart = [];
+
+function toggleCredentials() {
+    const box = document.getElementById("credentials-box");
+    box.style.display = box.style.display === "none" ? "block" : "none";
+}
+
+
+function renderRelatedProducts() {
+    const relatedDiv = document.getElementById("related-products");
+    relatedProducts.forEach(item => {
+        const card = document.createElement("div");
+        card.className = "product-card";
+        card.innerHTML = `
+            <p>${item.name}</p>
+            <p>₹${item.price}</p>
+            <button onclick="addToCart(${item.id}, '${item.name}', ${item.price})">Add to Cart</button>
+        `;
+        relatedDiv.appendChild(card);
+    });
+}
+
+function goHome() {
+    document.getElementById("cart-section").style.display = "none";
+    document.getElementById("login-section").style.display = "flex";
+}
+
+
+window.onload = function () {
+  document.getElementById("login-form").onsubmit = function (e) {
+    e.preventDefault();
+    const username = document.getElementById("username").value.trim();
+    const password = document.getElementById("password").value.trim();
+    const errorMsg = document.getElementById("login-error");
+
+    if (username === "HarshaTest" && password === "TESTMANUAL") {
+      document.getElementById("login-section").style.display = "none";
+      document.getElementById("cart-section").style.display = "block";
+      document.querySelector(".info-section").style.display = "none";
+      displayProducts();
+      displayCart();
+      errorMsg.style.display = "none";
+    } else {
+      errorMsg.textContent = "Invalid username or password!";
+      errorMsg.style.display = "block";
+    }
+  };
+
+  document.getElementById("showPassword").onchange = function () {
+    const pwdInput = document.getElementById("password");
+    pwdInput.type = this.checked ? "text" : "password";
+  };
+
+  document.getElementById("checkout-btn").onclick = showCheckout;
+  document.getElementById("home-btn").onclick = goHome;
+};
+
 
 function displayProducts() {
     const productsDiv = document.getElementById("products");
@@ -18,12 +74,13 @@ function displayProducts() {
             <h3 class="product-title">${product.name}</h3>
             <span class="product-price">Price: ₹${product.price}</span>
         </div>
-        <p class="product-desc">Premium quality ${product.name.toLowerCase()}</p>
+    <p class="product-desc">Premium quality ${product.name.toLowerCase()}</p>
         <button class="add-to-cart-btn" onclick="addToCart(${product.id})">
             <i class="fas fa-cart-plus"></i> Add to Cart
         </button>
     </div>
-`;
+  `;
+
         productsDiv.appendChild(item);
     });
 }
@@ -52,28 +109,43 @@ function updateCartUI() {
 function displayCart() {
     const cartDiv = document.getElementById("cart");
     cartDiv.innerHTML = "";
+
     if (cart.length === 0) {
-        cartDiv.innerHTML = "<p>Your cart is empty.</p>";
+        cartDiv.innerHTML = "<p style='text-align:center;'>🛒 Your cart is empty.</p>";
+        document.getElementById("subtotal").textContent = "0";
+        document.getElementById("grand-total").textContent = "0";
         return;
     }
-    cart.forEach(item => {
-        const cartItem = document.createElement("div");
-        cartItem.className = "cart-item";
-        cartItem.innerHTML = `
-        <div class="cart-item-content">
-            <span><strong>${item.name}</strong> × ${item.quantity}</span>
-            <span>$${(item.price * item.quantity).toFixed(2)}</span>
-        </div>
-        <button class="remove-btn" onclick="removeFromCart(${item.id})">
-            <i class="fas fa-trash"></i> Remove
-        </button>
-    `;
-        cartDiv.appendChild(cartItem);
-    });
 
-    const total = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
-    cartDiv.innerHTML += `<p><strong>Total: $${total.toFixed(2)}</strong></p>`;
+    const table = document.createElement("table");
+    table.className = "cart-table";
+    table.innerHTML = `
+        <thead>
+            <tr>
+                <th>Product</th>
+                <th>Qty</th>
+                <th>Price</th>
+                <th>Remove</th>
+            </tr>
+        </thead>
+        <tbody>
+            ${cart.map(item => `
+                <tr>
+                    <td>${item.name}</td>
+                    <td>${item.quantity}</td>
+                    <td>₹${(item.price * item.quantity).toFixed(2)}</td>
+                    <td><button onclick="removeFromCart(${item.id})" class="remove-btn"><i class="fas fa-trash"></i></button></td>
+                </tr>
+            `).join("")}
+        </tbody>
+    `;
+    cartDiv.appendChild(table);
+
+    const subtotal = cart.reduce((sum, item) => sum + item.price * item.quantity, 0);
+    document.getElementById("subtotal").textContent = subtotal.toFixed(2);
+    document.getElementById("grand-total").textContent = subtotal.toFixed(2);
 }
+
 
 function addToCart(productId) {
     const product = products.find(p => p.id === productId);
@@ -122,38 +194,6 @@ function goHome() {
     document.getElementById("password").value = "";
     document.getElementById("login-error").style.display = "none";
 }
-
-// Add event listeners after DOM is loaded
-window.onload = function () {
-    displayProducts();
-    displayCart();
-    document.getElementById("checkout-btn").onclick = showCheckout;
-    document.getElementById("home-btn").onclick = goHome;
-};
-
-// Login logic
-document.getElementById("login-form").onsubmit = function (e) {
-    e.preventDefault();
-    const username = document.getElementById("username").value.trim();
-    const password = document.getElementById("password").value.trim();
-    const errorMsg = document.getElementById("login-error");
-    if (username === "HarshaTest" && password === "TESTMANUAL") {
-        document.getElementById("login-section").style.display = "none";
-        document.getElementById("cart-section").style.display = "block";
-        document.querySelector('.info-section').style.display = "none"; // Hide info-section
-        displayProducts();
-        displayCart();
-        errorMsg.style.display = "none";
-    } else {
-        errorMsg.textContent = "Invalid username or password!";
-        errorMsg.style.display = "block";
-    }
-};
-
-document.getElementById("show-password").onchange = function () {
-    const pwdInput = document.getElementById("password");
-    pwdInput.type = this.checked ? "text" : "password";
-};
 
 function toggleDemoPass() {
     const passSpan = document.getElementById("demo-pass");
